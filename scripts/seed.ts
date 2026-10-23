@@ -19,9 +19,14 @@ async function seed() {
   // Stock/generative inspiration is not seeded as business portfolio work. Admins upload real event photos.
   void inspirationGallery;
   const adminEmails = (process.env.ADMIN_EMAILS ?? "").split(",").map((email) => email.trim().toLowerCase()).filter(Boolean);
-  for (const email of adminEmails) {
-    await db.update(users).set({ role: "admin", updatedAt: new Date() }).where(eq(users.email, email));
-  }
+  await db.transaction(async (tx) => {
+    for (const email of adminEmails) {
+      const promoted = await tx.update(users).set({ role: "admin", updatedAt: new Date() }).where(eq(users.email, email)).returning({ id: users.id });
+      if (!promoted[0]) {
+        throw new Error("Administrator promotion aborted: every ADMIN_EMAILS entry must belong to an already registered account");
+      }
+    }
+  });
   console.log(`Seed complete: settings, ${defaultServices.length} services, ${defaultPackages.length} packages. ${adminEmails.length} existing account(s) promoted to admin.`);
   process.exit(0);
 }
