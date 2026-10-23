@@ -1,0 +1,6 @@
+import Image from "next/image";
+import type { ReactNode } from "react";
+
+export function AuthShell({ eyebrow, title, copy, children }: { eyebrow: string; title: string; copy: string; children: ReactNode }) {
+  return <section className="container-shell grid min-h-[720px] items-stretch gap-10 py-12 lg:grid-cols-2 lg:py-20"><div className="relative hidden min-h-[650px] overflow-hidden rounded-[2rem] lg:block"><Image src="/images/wedding-stage.jpg" alt="Elegant floral wedding stage" fill sizes="50vw" className="object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-wine-dark/85 via-transparent to-transparent" /><div className="absolute bottom-0 p-10 text-white"><p className="font-display text-4xl leading-tight">“Every beautiful celebration begins with a thoughtful plan.”</p><p className="mt-4 text-xs uppercase tracking-[.18em] text-gold-light">Shri Shaam Tent House</p></div></div><div className="flex items-center justify-center"><div className="w-full max-w-md"><span className="eyebrow">{eyebrow}</span><h1 className="mt-4 font-display text-5xl leading-none text-wine-dark sm:text-6xl">{title}</h1><p className="mt-5 text-sm leading-7 text-stone-600">{copy}</p>{children}</div></div></section>;
+}

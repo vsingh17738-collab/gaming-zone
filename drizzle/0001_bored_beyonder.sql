@@ -1,0 +1,2 @@
+CREATE UNIQUE INDEX "payments_active_razorpay_order_unique" ON "payments" USING btree ("booking_id","kind") WHERE "payments"."method" = 'razorpay' AND "payments"."status" = 'created';--> statement-breakpoint
+CREATE UNIQUE INDEX "payments_pending_manual_proof_unique" ON "payments" USING btree ("booking_id","kind") WHERE "payments"."method" = 'manual' AND "payments"."status" = 'proof_submitted';

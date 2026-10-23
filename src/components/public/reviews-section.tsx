@@ -1,0 +1,7 @@
+import { Star } from "lucide-react";
+import { SectionHeading } from "@/components/ui/section-heading";
+
+interface Review { id: string; rating: number; comment: string; customerName: string }
+export function ReviewsSection({ reviews }: { reviews: Review[] }) {
+  return <section className="bg-sand/50 py-20 sm:py-28"><div className="container-shell"><SectionHeading eyebrow="Customer experiences" title="Real stories, after real celebrations." copy="Reviews are accepted only from customers with completed bookings and are published after moderation." align="center" />{reviews.length ? <div className="mt-12 grid gap-5 md:grid-cols-3">{reviews.map((review) => <blockquote key={review.id} className="card p-7"><div className="flex gap-1 text-gold">{Array.from({ length: review.rating }).map((_, index) => <Star key={index} size={15} fill="currentColor" />)}</div><p className="mt-5 font-display text-2xl leading-8 text-wine-dark">“{review.comment}”</p><footer className="mt-6 text-xs font-bold uppercase tracking-wider text-stone-500">{review.customerName}</footer></blockquote>)}</div> : <div className="mx-auto mt-10 max-w-2xl rounded-2xl border border-dashed border-gold/50 bg-white/60 p-8 text-center"><p className="font-display text-2xl text-wine-dark">No published customer reviews yet.</p><p className="mt-2 text-sm leading-6 text-stone-600">We don’t use sample testimonials. Genuine feedback will appear here after verified events.</p></div>}</div></section>;
+}

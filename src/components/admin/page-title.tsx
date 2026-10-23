@@ -1,0 +1,2 @@
+import type { ReactNode } from "react";
+export function AdminPageTitle({ eyebrow, title, copy, actions }: { eyebrow: string; title: string; copy?: string; actions?: ReactNode }) { return <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-[10px] font-bold uppercase tracking-[.18em] text-gold">{eyebrow}</p><h1 className="mt-1 font-display text-4xl font-semibold text-wine-dark sm:text-5xl">{title}</h1>{copy && <p className="mt-2 text-xs leading-5 text-stone-500">{copy}</p>}</div>{actions}</div>; }
